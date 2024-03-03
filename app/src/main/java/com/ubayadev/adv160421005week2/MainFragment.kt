@@ -33,13 +33,13 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var score = 0
         var answer = GenerateQuestion()
-        var pAns = binding.txtAnswer.text.toString().toInt()
+        var pAns = binding.txtAnswer.text.toString().toIntOrNull()
 
         binding.btnSubmit.setOnClickListener {
-            if (pAns == answer) {
-                score+=1
-                binding.txtAnswer.text.toString().toIntOrNull()
-                answer = GenerateQuestion()
+            if (pAns != null && pAns == answer) {
+                pAns = binding.txtAnswer.text.toString().toIntOrNull()
+                score++
+                GenerateQuestion()
             }
             else {
                 val action = MainFragmentDirections.mainToResult(score)
